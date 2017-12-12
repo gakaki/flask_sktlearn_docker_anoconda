@@ -7,6 +7,9 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 WORKDIR /root/
 
+# 替换为aliyun 的源头
+COPY apt_sources.list /etc/apt/sources.list
+
 # 使用镜像 安装anoconda https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/Dockerfile
 # 清华大学 anoconda 镜像地址 https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/
 RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
