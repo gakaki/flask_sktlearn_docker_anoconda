@@ -1,5 +1,9 @@
+boto3
 flask
 scikit-learn
+keras
 numpy
 requests
 ujson
+jupyter
+pandas

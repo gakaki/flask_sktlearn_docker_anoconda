@@ -43,7 +43,7 @@ def data_sales_num():
    return jsonify(res_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=9999)
 
 #using flask auto reload like php
 #https://stackoverflow.com/questions/16344756/auto-reloading-python-flask-app-upon-code-changes
