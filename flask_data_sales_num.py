@@ -13,7 +13,7 @@ app = Flask(__name__,template_folder=tmpl_dir)
 def hello():
     return "Flask Sales num by month regression!"
 
-# http://127.0.0.1:5000/ajaxtest
+# http://127.0.0.1:9999/ajaxtest
 @app.route('/ajaxtest')
 def ajaxtest():
    return render_template('ajaxtest.html')
@@ -34,13 +34,18 @@ def data_sales_num():
 
    res_data     = process(series_str,date_str)
 
+   max_value    = 0
+   if res_data != None:
+      lists     = [ res_data[key][0] for key in res_data ]
+      max_value = max(lists)
+
    end = time.clock()
 
    print('--==== end calc regression')
 
    print("--==== time elsaped %.2gs" % (end - start))
 
-   return jsonify(res_data)
+   return jsonify({'predict':max_value})
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9999)
