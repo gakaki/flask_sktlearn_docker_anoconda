@@ -61,6 +61,9 @@ COPY tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl /root/tensorflow-1.4.0-cp36-cp
 # https://github.com/mind/wheels/releases 复杂死了 还有针对aws这种的版本 我这里是本机笔记本还是generic 的cuda9吧
 RUN pip install /root/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
 
+
+RUN conda install --yes flask-cors
+
 #COPY . /root/
 # 暴露flask端口
 EXPOSE 9999

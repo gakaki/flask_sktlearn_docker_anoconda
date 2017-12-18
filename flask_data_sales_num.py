@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask import render_template
+from flask_cors import CORS, cross_origin
 from date_sales_num import process
 import ujson
 import time
@@ -7,6 +8,8 @@ import os
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__,template_folder=tmpl_dir)
+
+CORS(app)
 
 #不写methods默认get
 @app.route("/")
