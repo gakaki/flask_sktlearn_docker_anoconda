@@ -49,7 +49,7 @@ RUN mkdir -p  ~/.pip/ &&  echo "[global]\nindex-url = https://pypi.tuna.tsinghua
 # 醉了 跑 RUN conda update anaconda 会死机 奇怪
 #RUN conda install --yes --file /root/requirements.txt
 RUN conda install --yes boto3 flask scikit-learn keras \
-numpy requests ujson jupyter pandas
+numpy requests ujson jupyter pandas flask-cors
 
 # 安装pytorch 不知道requirments怎么装
 #RUN conda install pytorch=0.1.12 cuda80 -c soumith
@@ -62,11 +62,10 @@ COPY tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl /root/tensorflow-1.4.0-cp36-cp
 RUN pip install /root/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
 
 
-RUN conda install --yes flask-cors
 
 #COPY . /root/
 # 暴露flask端口
-EXPOSE 9999
+EXPOSE [9999,8888]
 # 运行flask
 #ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "python","flask_data_sales_num.py" ]
