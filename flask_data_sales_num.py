@@ -9,19 +9,27 @@ import os
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__,template_folder=tmpl_dir)
 
-CORS(app)
+
+@app.after_request
+def apply_caching(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    return response
 
 #不写methods默认get
 @app.route("/")
+@cross_origin()
 def hello():
     return "Flask Sales num by month regression!"
 
 # http://127.0.0.1:9999/ajaxtest
 @app.route('/ajaxtest')
+@cross_origin()
 def ajaxtest():
    return render_template('ajaxtest.html')
 
 @app.route('/data_sales_num', methods=['POST'])
+@cross_origin()
 def data_sales_num():
    json_obj     = ujson.decode(request.form["json"])
    series       = json_obj['series']
@@ -51,7 +59,8 @@ def data_sales_num():
    return jsonify({'predict':max_value})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=9999)
+   CORS(app)
+   app.run(debug=True, host='0.0.0.0', port=9999)
 
 #using flask auto reload like php
 #https://stackoverflow.com/questions/16344756/auto-reloading-python-flask-app-upon-code-changes
